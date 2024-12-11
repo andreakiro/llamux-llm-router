@@ -1,3 +1,8 @@
+[![GitHub stars](https://img.shields.io/github/stars/andreakiro/llamux-llm-router?style=social)](https://github.com/andreakiro/llamux-llm-router/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PyPI version](https://img.shields.io/pypi/v/llamux)](https://pypi.org/project/llamux/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+
 # llamux 🦙
 
 A simple router to rotate across your configured LLM endpoints, balancing load and avoiding rate limits. The router selects your preferred provider-model pair based on an implicit preference list, ensuring token and request limits (day/hour/minute) aren't crossed. State persists across sessions, with quotas stored in local cache.
