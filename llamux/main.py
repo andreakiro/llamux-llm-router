@@ -188,15 +188,18 @@ class Router:
         endpoint_ids = []
         while n_tries > 0:
             provider, model, eid, _ = self.query(
-                messages, excluded=endpoint_ids, autolog=True
+                messages, excluded=endpoint_ids, autolog=False
             )
             endpoint_ids.append(eid)
+
             try:
-                return litellm.completion(
+                response = litellm.completion(
                     model=f"{provider}/{model}",
                     messages=messages,
                     **kwargs,
                 )
+                self.log(response.usage.total_tokens, eid)
+                return response
             except Exception as e:
                 n_tries -= 1
                 if n_tries == 0:
