@@ -171,7 +171,6 @@ class Router:
     ) -> tuple[str, str, str, dict[str, str | int]]:
         excluded = excluded or []  # init.
         n_tokens = self.estimate_tokens(messages)
-        print(n_tokens)
         for eid, endpoint in self.endpoints.items():
             if eid not in excluded and endpoint.is_available(n_tokens):
                 if autolog:
