@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "llamux"
-version = "0.1.4"
+version = "0.1.5"
 description = "A simple llm router"
 authors = ["Andrea Pinto <ap@agpinto.com>"]
 license = "MIT"
