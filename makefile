@@ -12,7 +12,7 @@ install:
 .PHONY: pypi
 pypi:
 	@echo "reseting to latest remote..."
-	@git reset --hard origin/main
+	@git pull && git reset --hard origin/main
 	@echo "re-installing package..."
 	@make install
 	@echo "starting PyPI bump process..."
@@ -23,9 +23,9 @@ pypi:
 	    MAJOR=$$(echo $$OLD_VERSION | cut -d. -f1); \
 	    MINOR=$$(echo $$OLD_VERSION | cut -d. -f2); \
 	    PATCH=$$(echo $$OLD_VERSION | cut -d. -f3); \
-	    NEW_VERSION=$$MAJOR.$$MINOR.$$((PATCH + 1)); \
-	    echo "auto-incremented version to $$NEW_VERSION"; \
-	    poetry version $$NEW_VERSION; \
+	    VERSION=$$MAJOR.$$MINOR.$$((PATCH + 1)); \
+	    echo "auto-incremented version to $$VERSION"; \
+	    poetry version $$VERSION; \
 	else \
 	    echo "updating version to $$VERSION..."; \
 	    poetry version $$VERSION; \
