@@ -2,6 +2,7 @@ import time
 import os
 import hashlib
 import litellm
+import loguru
 
 CACHE_DIR = os.path.expanduser("~/.cache/llamux")
 
@@ -134,10 +135,11 @@ def load_endpoints_from(path: str) -> list[Endpoint]:
                 row["key"] if "key" in row else api_key_from_env(row["provider"])
             )
             if key is None:
-                raise Exception(
-                    f"No API key found for {row['provider']}.\
-                    Set {row['provider'].upper()}_API_KEY in your env."
+                loguru.logger.warning(
+                    f"No API key found for {row['provider']}:{row['model']} (skipping).\
+                         Set {row['provider'].upper()}_API_KEY in your env."
                 )
+                continue
             properties["key"] = key
             configs.append(
                 Endpoint(
@@ -146,6 +148,8 @@ def load_endpoints_from(path: str) -> list[Endpoint]:
                     properties=properties,
                 )
             )
+    if len(configs) == 0:
+        raise Exception("API keys found for none of the configured endpoints.")
     return configs
 
 
