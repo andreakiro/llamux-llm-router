@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 litellm = "^1.54.1"
+loguru = "^0.7.3"
 
 
 [tool.poetry.group.dev.dependencies]
